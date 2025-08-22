@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type : command
+code: ./model
+command: >-
+  python train.py 
+  --training_data ${{inputs.training_data}}
+  --reg_rate ${{inputs.reg_rate}}
+inputs:
+  training_data: 
+    type: uri_folder
+    path: azureml://subscriptions/f4d87b2a-842e-44ff-96e4-4f8454c0bbd6/resourcegroups/RGAML1/workspaces/Aml_W/datastores/workspaceblobstore/paths/LocalUpload/de8020a91c295605114900a420686f6e/
+  reg_rate: 0.01
+environment: "azureml:diabetes_env:3"
+compute: ic001
+experiment_name: diabetes
+description: diabetes job
