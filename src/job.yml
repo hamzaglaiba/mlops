@@ -8,7 +8,7 @@ command: >-
 inputs:
   training_data: 
     type: uri_file
-    path: azureml://subscriptions/f4d87b2a-842e-44ff-96e4-4f8454c0bbd6/resourcegroups/RGAML2/workspaces/AML/datastores/workspaceblobstore/paths/LocalUpload/97b092e5b082142924c57c76a7aab9a3e3e61dae398810a1956a744eac41ac50/
+    path: azureml://subscriptions/f4d87b2a-842e-44ff-96e4-4f8454c0bbd6/resourcegroups/RGAML2/workspaces/AML/datastores/workspaceblobstore/paths/LocalUpload/97b092e5b082142924c57c76a7aab9a3e3e61dae398810a1956a744eac41ac50/diabetes-dev.csv
   reg_rate: 0.01
 environment: "azureml:diabetes_env:1"
 compute: cpu-cluster
