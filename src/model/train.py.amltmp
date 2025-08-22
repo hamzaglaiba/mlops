@@ -11,19 +11,8 @@ from sklearn.linear_model import LogisticRegression
 
 # define functions
 def main(args):
-    # Ensure MLflow Registry URI uses a supported scheme when tracking to Azure ML
-    if not os.getenv("MLFLOW_REGISTRY_URI"):
-        try:
-            mlflow.set_registry_uri("file:///tmp/mlflow")
-        except Exception:
-            pass
-
-    # Enable MLflow autologging (robust across versions)
-    try:
-        mlflow.sklearn.autolog()
-    except TypeError:
-        # Fallback for older MLflow that may not accept certain kwargs
-        mlflow.autolog()
+    # TO DO: enable autologging
+    mlflow.sklearn.autolog()
 
     # read data
     df = get_csvs_df(args.training_data)
@@ -38,13 +27,7 @@ def main(args):
 def get_csvs_df(path):
     if not os.path.exists(path):
         raise RuntimeError(f"Cannot use non-existent path provided: {path}")
-
-    # Support folder of CSVs or a single CSV file
-    if os.path.isdir(path):
-        csv_files = glob.glob(os.path.join(path, "*.csv"))
-    else:
-        csv_files = [path] if path.lower().endswith(".csv") else []
-
+    csv_files = glob.glob(f"{path}/*.csv")
     if not csv_files:
         raise RuntimeError(f"No CSV files found in provided data path: {path}")
     return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
